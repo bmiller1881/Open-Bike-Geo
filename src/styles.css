@@ -1,3 +1,33 @@
-h1 {
-  color: red;
+:root {
+  --green1: darkgreen;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  background-color: var(--green1);
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--green1);
+}
+
+.container-page {
+  position: relative;
+  height: 1000px;
+}
+
+.calc {
+  margin: 50px;
 }
