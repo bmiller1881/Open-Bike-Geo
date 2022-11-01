@@ -52,7 +52,7 @@ module.exports = {
     static: {
       // tells webpack dev server where to serve static content
       directory: path.resolve(__dirname, 'dist'),
-      publicPath: '/dist',
+      publicPath: '/',
     },
     // allows backend requests to 8080 to be routed to 3000 automatically
     proxy: {
