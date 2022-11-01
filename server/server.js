@@ -1,10 +1,16 @@
 const express = require('express');
-const app = express();
 const path = require('path');
 
-app.get('/api', (req, res) => {
-  return res.status(200).json({ message: 'server is running' });
-});
+const app = express();
+
+const apiRouter = require('./routes/api');
+
+const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/api', apiRouter);
 
 if (process.env.NODE_ENV === 'production') {
   console.log(path.join(__dirname, '../dist'));
@@ -14,4 +20,19 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(3000, () => console.log('listening on port 3000'));
+app.use('*', (req, res) => {
+  res.status(404).send('page not found');
+});
+
+app.use((err, req, res, next) => {
+  const defaultError = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { error: 'An error occurred' },
+  };
+  const errorObj = Object.assign(defaultError, err);
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
+});
+
+app.listen(PORT, () => console.log(`listening on port ${PORT}...`));

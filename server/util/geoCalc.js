@@ -1,5 +1,3 @@
-// --- OPEN BIKE GEO ---
-
 // create class for Characteristic, including dimensions and calcs
 class Characteristic {
   constructor(variable, unit, value, unit2, value2) {
@@ -25,7 +23,6 @@ class Geometry {
       cgX,
       cgY,
       radiusGyration,
-      gravConst,
     } = details;
 
     // characteristics
@@ -38,8 +35,8 @@ class Geometry {
     this.massTotal = new Characteristic('m', 'kg', massTotal);
     this.cgX = new Characteristic('X', 'm', cgX);
     this.cgY = new Characteristic('Y', 'm', cgY);
-    this.radiusGyration = new Characteristic('kx', 'm', radiusGyration);
-    this.gravConst = new Characteristic('g', 'm/s^2', gravConst);
+    this.radiusGyration = new Characteristic('kx', 'm', 0.36);
+    this.gravConst = new Characteristic('g', 'm/s^2', 9.81);
     this.trail = this.#calcTrail();
     this.forkFlop = this.#calcForkFlop();
     this.k1 = this.#calcK1();
@@ -120,24 +117,25 @@ class Geometry {
   }
 }
 
+module.exports = { Geometry };
+
 // create Geometry instances
 
-const details1 = {
-  wheelbase: 0.76,
-  steeringAxisInclination: 15.5,
-  frontAxleOffset: 0.075,
-  frontWheelRadius: 0.37,
-  rearWheelRadius: 0.245,
-  handlebarRadius: 0.275,
-  massTotal: 70,
-  cgX: 0.33,
-  cgY: 1.08,
-  radiusGyration: 0.36,
-  gravConst: 9.81,
-};
+// const details1 = {
+//   wheelbase: 0.76,
+//   steeringAxisInclination: 15.5,
+//   frontAxleOffset: 0.075,
+//   frontWheelRadius: 0.37,
+//   rearWheelRadius: 0.245,
+//   handlebarRadius: 0.275,
+//   massTotal: 70,
+//   cgX: 0.33,
+//   cgY: 1.08,
+//   radiusGyration: 0.36,
+// };
 
-const geo1 = new Geometry(details1);
-console.log(geo1);
+// const geo1 = new Geometry(details1);
+// console.log(geo1);
 
 // this.steeringAxisInclination = {
 //   var: 'B',
