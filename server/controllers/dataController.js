@@ -3,7 +3,23 @@ const { Geo } = require('../models/dataModel');
 
 const dataController = {};
 
-dataController.getInitialData = (req, res, next) => {
+// find all Geo's
+dataController.getData = (req, res, next) => {
+  Geo.find({})
+    .then((data) => {
+      res.locals.data = data;
+      return next();
+    })
+    .catch((error) => {
+      return next({
+        log: 'dataController.getData: ERROR: ' + error,
+        message: 'dataController.getData: ERROR: Could not find data',
+      });
+    });
+};
+
+// create new Geo
+dataController.postData = (req, res, next) => {
   const defaultData = {
     wheelbase: 0.76,
     steeringAxisInclination: 15.5,
@@ -16,7 +32,8 @@ dataController.getInitialData = (req, res, next) => {
     cgY: 1.08,
   };
   const geo = new Geometry(defaultData);
-  geo.user = 'test';
+  geo.user = req.body.user;
+  geo.name = req.body.name;
   Geo.create(geo)
     .then((data) => {
       res.locals.data = data;
@@ -24,17 +41,42 @@ dataController.getInitialData = (req, res, next) => {
     })
     .catch((error) => {
       return next({
-        log: 'dataController.getInitialData: ERROR: ' + error,
-        message: 'dataController.getInitialData: ERROR: Could not create new bike',
+        log: 'dataController.postData: ERROR: ' + error,
+        message: 'dataController.postData: ERROR: Could not create new data',
       });
     });
-  // res.locals.data = new Geometry(defaultData);
-  // return next();
 };
 
-dataController.patchData = (req, res, next) => {
-  res.locals.data = new Geometry(req.body);
-  return next();
+dataController.deleteData = (req, res, next) => {
+  console.log(req.body.id);
+  Geo.deleteOne({ _id: req.body.id })
+    .then((data) => {
+      res.locals.data = data;
+      return next();
+    })
+    .catch((error) => {
+      return next({
+        log: 'dataController.deleteData: ERROR: ' + error,
+        message: 'dataController.deleteData: ERROR: Could not delete data',
+      });
+    });
+};
+
+dataController.putData = (req, res, next) => {
+  const geo = new Geometry(req.body);
+  geo.user = req.body.user;
+  geo.name = req.body.name;
+  res.locals.data = geo;
+  Geo.findOneAndReplace({ _id: req.body.id }, geo)
+    .then(() => {
+      return next();
+    })
+    .catch((error) => {
+      return next({
+        log: 'dataController.putData: ERROR: ' + error,
+        message: 'dataController.putData: ERROR: Could not update data',
+      });
+    });
 };
 
 module.exports = dataController;

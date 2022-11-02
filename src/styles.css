@@ -12,13 +12,14 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
   margin: 0;
-  background-color: rgb(242, 242, 242);
+  background-color: rgb(230, 230, 230);
 }
 
 header {
   background-color: var(--green1);
   color: white;
   padding: 10px 30px;
+  box-shadow: 3px 3px 8px grey;
 }
 
 footer {
@@ -32,8 +33,9 @@ p {
   font-size: 12px;
 }
 
-#feed {
-  text-align: center;
+nav {
+  display: inline-flex;
+  align-items: center;
 }
 
 .logo-main {
@@ -42,9 +44,16 @@ p {
   margin-right: 15px;
 }
 
-nav {
-  display: inline-flex;
-  align-items: center;
+.main-container {
+  max-width: 1000px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+footer > div,
+header > div {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .calc-container {
@@ -107,43 +116,52 @@ nav {
   margin: 10px 0;
 }
 
-.calc-button {
+button {
+  box-shadow: 3px 3px 8px grey;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+button:active {
+  box-shadow: 3px 3px 8px black;
+}
+
+.delete-button {
   grid-column: 1 / span 2;
   width: 60%;
   color: white;
   background-color: black;
-  box-shadow: 3px 3px 8px grey;
-  border: none;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 10px;
 }
 
-.reset-button {
+.calc-button {
   grid-column: 1 / span 2;
   width: 60%;
   color: black;
   background-color: white;
-  box-shadow: 3px 3px 8px grey;
-  border: none;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 10px;
 }
 
-.save-button {
+.new-button {
   grid-column: 1 / span 2;
   width: 60%;
   color: white;
   background-color: var(--green1);
-  box-shadow: 3px 3px 8px grey;
-  border: none;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 10px;
 }
 
 .graph-container {
   grid-column: 1 / span 2;
   width: 80%;
+}
+
+.new-input {
+  text-align: center;
+  font-size: 22px;
+  grid-column: 1 / span 2;
+  width: 59%;
+  box-shadow: 3px 3px 8px grey;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
 }

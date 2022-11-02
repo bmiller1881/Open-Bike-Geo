@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const geoSchema = new Schema({
   user: { type: String, required: true },
+  name: { type: String, required: true },
   wheelbase: { type: Schema.Types.Mixed, required: true },
   steeringAxisInclination: { type: Schema.Types.Mixed, required: true },
   frontAxleOffset: { type: Schema.Types.Mixed, required: true },

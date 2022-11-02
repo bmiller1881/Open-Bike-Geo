@@ -3,15 +3,19 @@ const dataController = require('../controllers/dataController');
 
 const router = express.Router();
 
-router.get('/', dataController.getInitialData, (req, res) => {
+router.get('/', dataController.getData, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 
-router.patch('/', dataController.patchData, (req, res) => {
+router.post('/', dataController.postData, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 
-router.patch('/', dataController.patchData, (req, res) => {
+router.put('/', dataController.putData, (req, res) => {
+  res.status(200).json(res.locals.data);
+});
+
+router.delete('/', dataController.deleteData, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 

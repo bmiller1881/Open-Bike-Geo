@@ -13,26 +13,31 @@ function useInput(initialState) {
 }
 
 function Calc(props) {
-  const [wheelbase, setWheelbase, wheelbaseOnChange] = useInput(0);
-  const [steeringAxisInclination, setSteeringAxisInclination, steeringAxisInclinationOnChange] = useInput(0);
-  const [frontAxleOffset, setFrontAxleOffset, frontAxleOffsetOnChange] = useInput(0);
-  const [frontWheelRadius, setFrontWheelRadius, frontWheelRadiusOnChange] = useInput(0);
-  const [rearWheelRadius, setRearWheelRadius, rearWheelRadiusOnChange] = useInput(0);
-  const [handlebarRadius, setHandlebarRadius, handlebarRadiusOnChange] = useInput(0);
-  const [massTotal, setMassTotal, massTotalOnChange] = useInput(0);
-  const [cgX, setCgX, cgXOnChange] = useInput(0);
-  const [cgY, setCgY, cgYOnChange] = useInput(0);
-  const [radiusGyration, setRadiusGyration] = useState(0);
-  const [gravConst, setGravConst] = useState(0);
-  const [trail, setTrail] = useState(0);
-  const [forkFlop, setForkFlop] = useState(0);
-  const [k1, setK1] = useState(0);
-  const [k2, setK2] = useState(0);
-  const [k3, setK3] = useState(0);
-  const [k4, setK4] = useState(0);
-  const [graph, setGraph] = useState([]);
+  const [wheelbase, setWheelbase, wheelbaseOnChange] = useInput(props.data.wheelbase.val);
+  const [steeringAxisInclination, setSteeringAxisInclination, steeringAxisInclinationOnChange] = useInput(
+    props.data.steeringAxisInclination.val
+  );
+  const [frontAxleOffset, setFrontAxleOffset, frontAxleOffsetOnChange] = useInput(props.data.frontAxleOffset.val);
+  const [frontWheelRadius, setFrontWheelRadius, frontWheelRadiusOnChange] = useInput(props.data.frontWheelRadius.val);
+  const [rearWheelRadius, setRearWheelRadius, rearWheelRadiusOnChange] = useInput(props.data.rearWheelRadius.val);
+  const [handlebarRadius, setHandlebarRadius, handlebarRadiusOnChange] = useInput(props.data.handlebarRadius.val);
+  const [massTotal, setMassTotal, massTotalOnChange] = useInput(props.data.massTotal.val);
+  const [cgX, setCgX, cgXOnChange] = useInput(props.data.cgX.val);
+  const [cgY, setCgY, cgYOnChange] = useInput(props.data.cgY.val);
+  const [radiusGyration, setRadiusGyration] = useState(props.data.radiusGyration.val);
+  const [gravConst, setGravConst] = useState(props.data.gravConst.val);
+  const [trail, setTrail] = useState(props.data.trail.val);
+  const [forkFlop, setForkFlop] = useState(props.data.forkFlop.val);
+  const [k1, setK1] = useState(props.data.k1.val);
+  const [k2, setK2] = useState(props.data.k2.val);
+  const [k3, setK3] = useState(props.data.k3.val);
+  const [k4, setK4] = useState(props.data.k4.val);
+  const [graph, setGraph] = useState(props.data.graph);
 
   const stateObj = {
+    id: props.data._id,
+    user: props.data.user,
+    name: props.data.name,
     wheelbase,
     steeringAxisInclination,
     frontAxleOffset,
@@ -65,18 +70,9 @@ function Calc(props) {
     setGraph(data.graph);
   }
 
-  function getData() {
-    fetch('/api')
-      .then((res) => res.json())
-      .then((data) => {
-        mapDataToState(data);
-      })
-      .catch((error) => console.log('ERROR: get-fetch data from /api: ' + error));
-  }
-
-  function patchData() {
+  function putData() {
     fetch('/api', {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'Application/JSON',
       },
@@ -87,17 +83,31 @@ function Calc(props) {
         console.log(data);
         mapDataToState(data);
       })
-      .catch((error) => console.log('ERROR: post-fetch data from /api: ' + error));
+      .catch((error) => console.log('ERROR: could not put-fetch: ' + error));
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  function deleteData() {
+    fetch('/api', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify({ id: props.data._id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        props.delete();
+      })
+      .catch((error) => console.log('ERROR: could not delete-fetch: ' + error));
+  }
 
   return (
     <div>
       <div className="calc-container">
-        <h3 className="calc-title">{props.name}: Bicycle Handling Characteristics</h3>
+        <h3 className="calc-title">
+          Name: <em>{props.data.name}</em>
+        </h3>
         <div className="calc-sub-container calc-input-container">
           <h4 className="calc-title">Input Bicycle Characteristics</h4>
           <CalcInput name="wheelbase" title="Wheelbase" value={wheelbase} onChange={wheelbaseOnChange} unit="m" />
@@ -117,13 +127,7 @@ function Calc(props) {
             unit="m"
           />
           <CalcInput name="rearWheelRadius" title="Rear Wheel Radius" value={rearWheelRadius} onChange={rearWheelRadiusOnChange} unit="m" />
-          <CalcInput
-            name="handlebarRadius"
-            title="Handlebar Wheel Radius"
-            value={handlebarRadius}
-            onChange={handlebarRadiusOnChange}
-            unit="m"
-          />
+          <CalcInput name="handlebarRadius" title="Handlebar Radius" value={handlebarRadius} onChange={handlebarRadiusOnChange} unit="m" />
           <CalcInput name="massTotal" title="Mass Total" value={massTotal} onChange={massTotalOnChange} unit="kg" />
           <CalcInput name="cgX" title="Horizontal Center of Gravity" value={cgX} onChange={cgXOnChange} unit="m" />
           <CalcInput name="cgY" title="Vertical Center of Gravity" value={cgY} onChange={cgYOnChange} unit="m" />
@@ -139,15 +143,12 @@ function Calc(props) {
           <CalcValues name="k3" title="k3" value={k3} unit="m/N" />
           <CalcValues name="k4" title="k4" value={k4} unit="1/m" />
         </div>
-        <button className="reset-button" onClick={getData}>
-          <strong>RESET</strong>
-        </button>
-        <button className="calc-button" onClick={patchData}>
+        <button className="calc-button" onClick={putData}>
           <strong>CALCULATE</strong>
         </button>
         <LineGraph data={graph} />
-        <button className="save-button" onClick={patchData}>
-          <strong>SAVE</strong>
+        <button className="delete-button" onClick={deleteData}>
+          <strong>DELETE</strong>
         </button>
       </div>
     </div>
