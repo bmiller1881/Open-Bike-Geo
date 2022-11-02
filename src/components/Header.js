@@ -1,10 +1,12 @@
 import React from 'react';
+import logo from '../assets/logo.png';
 
 function Header(props) {
   return (
     <header>
       <nav>
-        <h3>OPEN BIKE GEO</h3>
+        <img className="logo-main" src={logo} alt="logo"></img>
+        <h2>OPEN BIKE GEO</h2>
       </nav>
     </header>
   );

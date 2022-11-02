@@ -45,6 +45,11 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        // transpile png
+        test: /\.png$/i,
+        use: ['url-loader'],
+      },
     ],
   },
   // server allows for hot module reloading (HMR) in dev mode

@@ -1,5 +1,6 @@
 :root {
   --green1: darkgreen;
+  --color-container: white;
 }
 
 * {
@@ -11,12 +12,13 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
   margin: 0;
+  background-color: rgb(242, 242, 242);
 }
 
 header {
   background-color: var(--green1);
   color: white;
-  padding: 15px 20px;
+  padding: 20px 30px;
 }
 
 footer {
@@ -30,6 +32,17 @@ p {
   font-size: 12px;
 }
 
+.logo-main {
+  filter: grayscale(1) invert(1);
+  height: 30px;
+  margin-right: 15px;
+}
+
+nav {
+  display: inline-flex;
+  align-items: center;
+}
+
 .calc-container {
   margin: 50px;
   padding: 30px;
@@ -38,6 +51,7 @@ p {
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr;
+  background-color: var(--color-container);
 }
 
 .calc-title {
@@ -49,7 +63,7 @@ p {
 .calc-sub-container {
   margin: 10px;
   padding: 20px;
-  width: 300px;
+  width: 80%;
   box-shadow: 3px 3px 8px grey;
   border-radius: 10px;
 }
@@ -81,8 +95,12 @@ p {
   grid-column: 2 / 2;
 }
 
-.m-10 {
+.m-10-left {
   margin-left: 5px;
+}
+
+.m-10-vert {
+  margin: 10px 0;
 }
 
 .calc-button {
@@ -107,4 +125,21 @@ p {
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
+}
+
+.save-button {
+  grid-column: 1 / span 2;
+  width: 60%;
+  color: white;
+  background-color: var(--green1);
+  box-shadow: 3px 3px 8px grey;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.graph-container {
+  grid-column: 1 / span 2;
+  width: 80%;
 }

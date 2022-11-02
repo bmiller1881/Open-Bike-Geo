@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CalcInput from './CalcInput';
 import CalcValues from './CalcValues';
+import LineGraph from './LineGraph';
 
 // custom hook for input boxes
 function useInput(initialState) {
@@ -29,7 +30,7 @@ function Calc(props) {
   const [k2, setK2] = useState(0);
   const [k3, setK3] = useState(0);
   const [k4, setK4] = useState(0);
-  const [graph, setGraph] = useState(0);
+  const [graph, setGraph] = useState([]);
 
   const stateObj = {
     wheelbase,
@@ -46,10 +47,10 @@ function Calc(props) {
   function mapDataToState(data) {
     setWheelbase(data.wheelbase.val);
     setSteeringAxisInclination(data.steeringAxisInclination.val);
-    setFrontAxleOffset(data.frontWheelRadius.val);
-    setFrontWheelRadius(data.rearWheelRadius.val);
-    setRearWheelRadius(data.handlebarRadius.val);
-    setHandlebarRadius(data.wheelbase.val);
+    setFrontAxleOffset(data.frontAxleOffset.val);
+    setFrontWheelRadius(data.frontWheelRadius.val);
+    setRearWheelRadius(data.rearWheelRadius.val);
+    setHandlebarRadius(data.handlebarRadius.val);
     setMassTotal(data.massTotal.val);
     setCgX(data.cgX.val);
     setCgY(data.cgY.val);
@@ -61,6 +62,7 @@ function Calc(props) {
     setK2(data.k2.val);
     setK3(data.k3.val);
     setK4(data.k4.val);
+    setGraph(data.graph);
   }
 
   function getData() {
@@ -142,6 +144,10 @@ function Calc(props) {
         </button>
         <button className="calc-button" onClick={patchData}>
           <strong>CALCULATE</strong>
+        </button>
+        <LineGraph data={graph} />
+        <button className="save-button" onClick={patchData}>
+          <strong>SAVE</strong>
         </button>
       </div>
     </div>
