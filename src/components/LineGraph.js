@@ -28,7 +28,7 @@ function LineGraph(props) {
                 { x: '6', y: 0 },
               ]}
             />
-            <CartesianGrid stroke="lightgrey" />
+            <CartesianGrid stroke="rgb(230,230,230)" />
             <XAxis dataKey="velocity" tick={{ fontSize: 12 }} label={{ value: 'velocity [m/s]', position: 'insideBottom', offset: -15 }} />
             <YAxis
               type="number"
@@ -45,7 +45,7 @@ function LineGraph(props) {
           <LineChart data={props.data} margin={{ top: 20, right: 50, left: 0, bottom: 20 }}>
             <Line type="natural" dataKey="controlSensitivity" dot={false} strokeWidth={3} stroke="green" isAnimationActive={false} />
             <ReferenceLine stroke="red" strokeDasharray="3 3" strokeWidth={3} y={25} />
-            <CartesianGrid stroke="lightgrey" />
+            <CartesianGrid stroke="rgb(230,230,230)" />
             <XAxis dataKey="velocity" tick={{ fontSize: 12 }} label={{ value: 'velocity [m/s]', position: 'insideBottom', offset: -15 }} />
             <YAxis
               type="number"

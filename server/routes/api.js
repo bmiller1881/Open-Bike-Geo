@@ -11,4 +11,8 @@ router.patch('/', dataController.patchData, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 
+router.patch('/', dataController.patchData, (req, res) => {
+  res.status(200).json(res.locals.data);
+});
+
 module.exports = router;

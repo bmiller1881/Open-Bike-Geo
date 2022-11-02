@@ -118,36 +118,3 @@ class Geometry {
 }
 
 module.exports = { Geometry };
-
-// create Geometry instances
-
-// const details1 = {
-//   wheelbase: 0.76,
-//   steeringAxisInclination: 15.5,
-//   frontAxleOffset: 0.075,
-//   frontWheelRadius: 0.37,
-//   rearWheelRadius: 0.245,
-//   handlebarRadius: 0.275,
-//   massTotal: 70,
-//   cgX: 0.33,
-//   cgY: 1.08,
-//   radiusGyration: 0.36,
-// };
-
-// const geo1 = new Geometry(details1);
-// console.log(geo1);
-
-// this.steeringAxisInclination = {
-//   var: 'B',
-//   val: steeringAxisInclination,
-//   unit: 'deg',
-// };
-// this.frontAxleOffset = { var: 'e', val: frontAxleOffset, unit: 'm' };
-// this.frontWheelRadius = { var: 'rf', val: frontWheelRadius, unit: 'm' };
-// this.rearWheelRadius = { var: 'rr', val: rearWheelRadius, unit: 'm' };
-// this.handlebarRadius = { var: 'rh', val: handlebarRadius, unit: 'm' };
-// this.massTotal = { var: 'm', val: massTotal, unit: 'kg' };
-// this.cgX = { var: 'B', val: cgX, unit: 'm' };
-// this.cgY = { var: 'h', val: cgY, unit: 'm' };
-// this.radiusGyration = { var: 'kx', val: radiusGyration, unit: 'm' };
-// this.gravConst = { var: 'g', val: gravConst, unit: 'm/s^2' };

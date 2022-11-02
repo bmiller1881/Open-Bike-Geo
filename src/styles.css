@@ -18,7 +18,7 @@ body {
 header {
   background-color: var(--green1);
   color: white;
-  padding: 20px 30px;
+  padding: 10px 30px;
 }
 
 footer {
@@ -30,6 +30,10 @@ footer {
 
 p {
   font-size: 12px;
+}
+
+#feed {
+  text-align: center;
 }
 
 .logo-main {

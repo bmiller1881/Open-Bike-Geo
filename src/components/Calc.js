@@ -97,7 +97,7 @@ function Calc(props) {
   return (
     <div>
       <div className="calc-container">
-        <h3 className="calc-title">Calculate Bicycle Handling Characteristics</h3>
+        <h3 className="calc-title">{props.name}: Bicycle Handling Characteristics</h3>
         <div className="calc-sub-container calc-input-container">
           <h4 className="calc-title">Input Bicycle Characteristics</h4>
           <CalcInput name="wheelbase" title="Wheelbase" value={wheelbase} onChange={wheelbaseOnChange} unit="m" />
