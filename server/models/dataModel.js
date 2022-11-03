@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const geoSchema = new Schema({
-  user: { type: String, required: true },
+  // user: { type: String, required: true },
   userId: { type: String, required: true },
   name: { type: String, required: true },
   wheelbase: { type: Schema.Types.Mixed, required: true },

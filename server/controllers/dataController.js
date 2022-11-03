@@ -49,7 +49,7 @@ dataController.postData = (req, res, next) => {
     cgY: 1.08,
   };
   const geo = new Geometry(defaultData);
-  geo.user = req.body.user;
+  // geo.user = req.body.user;
   geo.name = req.body.name;
   geo.userId = req.cookies.ssid;
   Geo.create(geo)
@@ -85,6 +85,7 @@ dataController.putData = (req, res, next) => {
   const geo = new Geometry(req.body);
   geo.user = req.body.user;
   geo.name = req.body.name;
+  geo.userId = req.cookies.ssid;
   res.locals.data = geo;
   Geo.findOneAndReplace({ _id: req.body.id }, geo)
     .exec()

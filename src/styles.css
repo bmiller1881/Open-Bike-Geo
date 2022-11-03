@@ -66,6 +66,10 @@ nav p {
   margin-right: 15px;
 }
 
+.icon-opacity {
+  opacity: 0.5;
+}
+
 .main-container {
   max-width: 1000px;
   text-align: center;
@@ -117,7 +121,8 @@ header > div {
 
 .graph-container {
   grid-column: 1 / span 2;
-  width: 80%;
+  width: 90%;
+  margin: 15px;
 }
 
 .calc-input,

@@ -34,7 +34,7 @@ function UserFeed(props) {
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify({ user: 'testUser', name: inputName }),
+      body: JSON.stringify({ name: inputName }),
     })
       .then((res) => res.json())
       .then((data) => {
