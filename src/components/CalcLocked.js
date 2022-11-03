@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CalcInput from './CalcInput';
 import CalcValues from './CalcValues';
 import LineGraph from './LineGraph';
+import Schematic from './Schematic';
 
 // custom hook for input boxes
 function useInput(initialState) {
@@ -34,80 +35,26 @@ function Calc(props) {
   const [k4, setK4] = useState(props.data.k4.val);
   const [graph, setGraph] = useState(props.data.graph);
 
-  const stateObj = {
-    id: props.data._id,
-    user: props.data.user,
-    name: props.data.name,
-    wheelbase,
-    steeringAxisInclination,
-    frontAxleOffset,
-    frontWheelRadius,
-    rearWheelRadius,
-    handlebarRadius,
-    massTotal,
-    cgX,
-    cgY,
+  const dimsObj = {
+    wheelbase: wheelbase,
+    steeringAxisInclination: steeringAxisInclination,
+    frontAxleOffset: frontAxleOffset,
+    frontWheelRadius: frontWheelRadius,
+    rearWheelRadius: rearWheelRadius,
+    handlebarRadius: handlebarRadius,
+    cgX: cgX,
+    cgY: cgY,
   };
-
-  function mapDataToState(data) {
-    setWheelbase(data.wheelbase.val);
-    setSteeringAxisInclination(data.steeringAxisInclination.val);
-    setFrontAxleOffset(data.frontAxleOffset.val);
-    setFrontWheelRadius(data.frontWheelRadius.val);
-    setRearWheelRadius(data.rearWheelRadius.val);
-    setHandlebarRadius(data.handlebarRadius.val);
-    setMassTotal(data.massTotal.val);
-    setCgX(data.cgX.val);
-    setCgY(data.cgY.val);
-    setRadiusGyration(data.radiusGyration.val);
-    setGravConst(data.gravConst.val);
-    setTrail(data.trail.val);
-    setForkFlop(data.forkFlop.val);
-    setK1(data.k1.val);
-    setK2(data.k2.val);
-    setK3(data.k3.val);
-    setK4(data.k4.val);
-    setGraph(data.graph);
-  }
-
-  function putData() {
-    fetch('/api', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify(stateObj),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        mapDataToState(data);
-      })
-      .catch((error) => console.log('ERROR: could not put-fetch: ' + error));
-  }
-
-  function deleteData() {
-    fetch('/api', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify({ id: props.data._id }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        props.delete();
-      })
-      .catch((error) => console.log('ERROR: could not delete-fetch: ' + error));
-  }
 
   return (
     <div>
       <div className="calc-container">
         <h3 className="calc-title">
-          Name: <em>{props.data.name}</em>
+          Study Title: <em>{props.data.name}</em>
         </h3>
+        <div className="calc-sub-container graph-container">
+          <Schematic dims={dimsObj} />
+        </div>
         <div className="calc-sub-container calc-input-container">
           <h4 className="calc-title">Input Bicycle Characteristics</h4>
           <CalcInput name="wheelbase" title="Wheelbase" value={wheelbase} onChange={wheelbaseOnChange} unit="m" disabled={true} />

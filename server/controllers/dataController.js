@@ -38,15 +38,15 @@ dataController.getUserData = (req, res, next) => {
 // create new Geo
 dataController.postData = (req, res, next) => {
   const defaultData = {
-    wheelbase: 0.76,
-    steeringAxisInclination: 15.5,
-    frontAxleOffset: 0.075,
-    frontWheelRadius: 0.37,
-    rearWheelRadius: 0.245,
-    handlebarRadius: 0.275,
-    massTotal: 70,
-    cgX: 0.33,
-    cgY: 1.08,
+    wheelbase: 1,
+    steeringAxisInclination: 18,
+    frontAxleOffset: 0.025,
+    frontWheelRadius: 0.3,
+    rearWheelRadius: 0.3,
+    handlebarRadius: 0.3,
+    massTotal: 100,
+    cgX: 0.4,
+    cgY: 1.2,
   };
   const geo = new Geometry(defaultData);
   // geo.user = req.body.user;

@@ -24,7 +24,7 @@ function LineGraph(props) {
               label={{ value: 'control spring [Nm/rad]', angle: -90, position: 'insideBottomLeft', offset: 20 }}
             />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter data={props.data} fill="#82ca9d" line />
+            <Scatter data={props.data} fill="#82b74b" line />
           </ScatterChart>
         </ResponsiveContainer>
       </div>
@@ -47,7 +47,7 @@ function LineGraph(props) {
               label={{ value: 'control spring [rad/s/m]', angle: -90, position: 'insideBottomLeft', offset: 20 }}
             />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter data={props.data} fill="#82ca9d" line />
+            <Scatter data={props.data} fill="#82b74b" line />
           </ScatterChart>
         </ResponsiveContainer>
       </div>

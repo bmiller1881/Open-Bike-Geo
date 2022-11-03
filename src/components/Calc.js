@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CalcInput from './CalcInput';
 import CalcValues from './CalcValues';
 import LineGraph from './LineGraph';
+import Schematic from './Schematic';
 
 // custom hook for input boxes
 function useInput(initialState) {
@@ -47,6 +48,17 @@ function Calc(props) {
     massTotal,
     cgX,
     cgY,
+  };
+
+  const dimsObj = {
+    wheelbase: wheelbase,
+    steeringAxisInclination: steeringAxisInclination,
+    frontAxleOffset: frontAxleOffset,
+    frontWheelRadius: frontWheelRadius,
+    rearWheelRadius: rearWheelRadius,
+    handlebarRadius: handlebarRadius,
+    cgX: cgX,
+    cgY: cgY,
   };
 
   function mapDataToState(data) {
@@ -106,8 +118,11 @@ function Calc(props) {
     <div>
       <div className="calc-container">
         <h3 className="calc-title">
-          Name: <em>{props.data.name}</em>
+          Study Title: <em>{props.data.name}</em>
         </h3>
+        <div className="calc-sub-container graph-container">
+          <Schematic dims={dimsObj} />
+        </div>
         <div className="calc-sub-container calc-input-container">
           <h4 className="calc-title">Input Bicycle Characteristics</h4>
           <CalcInput name="wheelbase" title="Wheelbase" value={wheelbase} onChange={wheelbaseOnChange} unit="m" />

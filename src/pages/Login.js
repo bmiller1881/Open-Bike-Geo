@@ -53,7 +53,7 @@ function Login(props) {
             SUBMIT
           </button>
           <br />
-          <a className="m-sm blue" href="/signup">
+          <a className="m-sm color-secondary" href="/signup">
             <strong>sign up</strong>
           </a>
         </div>
