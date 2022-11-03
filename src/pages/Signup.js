@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 
-function Login(props) {
+function Signup(props) {
   const navigate = useNavigate();
   const [inputUsername, setInputUsername] = useState('');
   const [inputPassword, setInputPassword] = useState('');
@@ -13,7 +13,7 @@ function Login(props) {
     // flashes auth response if still incorrect
     setAuthResponse('');
     if (inputUsername === '' || inputPassword === '') return;
-    fetch('/api/login', {
+    fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
@@ -21,7 +21,7 @@ function Login(props) {
       body: JSON.stringify({ username: inputUsername, password: inputPassword }),
     })
       .then((res) => {
-        if (res.status === 401) setAuthResponse('incorrect username or password!!!');
+        if (res.status === 409) setAuthResponse('username already taken');
         else if (res.status === 200) {
           navigate('/user');
         }
@@ -35,7 +35,7 @@ function Login(props) {
       <Header />
       <div className="main-container p-v-200">
         <div className="container flex-col">
-          <h2 className="m-sm">LOGIN</h2>
+          <h2 className="m-sm">SIGN UP</h2>
           <label className="m-sm">
             <strong>username:</strong>
           </label>
@@ -52,10 +52,6 @@ function Login(props) {
           <button className="new-button m-sm" onClick={postData}>
             SUBMIT
           </button>
-          <br />
-          <a className="m-sm blue" href="/signup">
-            <strong>sign up</strong>
-          </a>
         </div>
       </div>
       <Footer />
@@ -63,4 +59,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default Signup;

@@ -27,15 +27,37 @@ footer {
   background-color: var(--green1);
   color: white;
   padding: 10px 20px;
+  box-shadow: 3px 3px 8px grey;
 }
 
 p {
   font-size: 12px;
 }
 
+a {
+  color: white;
+}
+
+.blue {
+  color: blue;
+}
+
+.color-warning {
+  color: red;
+}
+
 nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav div {
   display: inline-flex;
   align-items: center;
+}
+
+nav p {
+  margin: 5px;
 }
 
 .logo-main {
@@ -54,6 +76,14 @@ footer > div,
 header > div {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.container {
+  margin: 50px;
+  padding: 30px;
+  box-shadow: 3px 3px 8px grey;
+  border-radius: 10px;
+  background-color: var(--color-container);
 }
 
 .calc-container {
@@ -85,6 +115,11 @@ header > div {
   grid-column: 1 / 2;
 }
 
+.graph-container {
+  grid-column: 1 / span 2;
+  width: 80%;
+}
+
 .calc-input,
 .calc-value {
   margin: 10px;
@@ -102,6 +137,10 @@ header > div {
 
 .input-3 {
   width: 70px;
+}
+
+.input-4 {
+  width: 40%;
 }
 
 .calc-value-container {
@@ -149,11 +188,6 @@ button:active {
   background-color: var(--green1);
 }
 
-.graph-container {
-  grid-column: 1 / span 2;
-  width: 80%;
-}
-
 .new-input {
   text-align: center;
   font-size: 22px;
@@ -164,4 +198,12 @@ button:active {
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
+}
+
+.p-v-200 {
+  padding: 200px 0;
+}
+
+.m-sm {
+  margin: 0.75em;
 }

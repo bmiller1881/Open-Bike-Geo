@@ -1,16 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
-import Feed from '../components/Feed';
+import UserFeed from '../components/UserFeed';
 import Footer from '../components/Footer';
 
-function Home(props) {
+function User(props) {
   return (
     <>
       <Header></Header>
-      <Feed />
+      <UserFeed />
       <Footer></Footer>
     </>
   );
 }
 
-export default Home;
+export default User;

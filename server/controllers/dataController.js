@@ -6,6 +6,7 @@ const dataController = {};
 // find all Geo's
 dataController.getData = (req, res, next) => {
   Geo.find({})
+    .exec()
     .then((data) => {
       res.locals.data = data;
       return next();
@@ -14,6 +15,22 @@ dataController.getData = (req, res, next) => {
       return next({
         log: 'dataController.getData: ERROR: ' + error,
         message: 'dataController.getData: ERROR: Could not find data',
+      });
+    });
+};
+
+// find only User Geo's
+dataController.getUserData = (req, res, next) => {
+  Geo.find({ userId: req.cookies.ssid })
+    .exec()
+    .then((data) => {
+      res.locals.data = data;
+      return next();
+    })
+    .catch((error) => {
+      return next({
+        log: 'dataController.getUserData: ERROR: ' + error,
+        message: 'dataController.getUserData: ERROR: Could not find data',
       });
     });
 };
@@ -34,6 +51,7 @@ dataController.postData = (req, res, next) => {
   const geo = new Geometry(defaultData);
   geo.user = req.body.user;
   geo.name = req.body.name;
+  geo.userId = req.cookies.ssid;
   Geo.create(geo)
     .then((data) => {
       res.locals.data = data;
@@ -50,6 +68,7 @@ dataController.postData = (req, res, next) => {
 dataController.deleteData = (req, res, next) => {
   console.log(req.body.id);
   Geo.deleteOne({ _id: req.body.id })
+    .exec()
     .then((data) => {
       res.locals.data = data;
       return next();
@@ -68,6 +87,7 @@ dataController.putData = (req, res, next) => {
   geo.name = req.body.name;
   res.locals.data = geo;
   Geo.findOneAndReplace({ _id: req.body.id }, geo)
+    .exec()
     .then(() => {
       return next();
     })

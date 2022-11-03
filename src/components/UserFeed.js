@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Calc from './Calc';
+import { useNavigate } from 'react-router-dom';
 
-function Feed(props) {
+function UserFeed(props) {
+  const navigate = useNavigate();
   const [calcList, setCalcList] = useState([]);
   const [inputName, setInputName] = useState('');
 
@@ -10,8 +12,11 @@ function Feed(props) {
   }, []);
 
   function getData() {
-    fetch('/api')
-      .then((res) => res.json())
+    fetch('/api/user')
+      .then((res) => {
+        if (res.status === 401) navigate('/login');
+        return res.json();
+      })
       .then((data) => {
         const calcListAdd = [];
         data.reverse().forEach((geo) => {
@@ -57,4 +62,4 @@ function Feed(props) {
   );
 }
 
-export default Feed;
+export default UserFeed;
