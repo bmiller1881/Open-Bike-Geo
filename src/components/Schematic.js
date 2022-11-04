@@ -18,15 +18,15 @@ const Schematic = (props) => {
   const forkHeight = cgY / 2;
 
   return (
-    <Stage width={500} height={windowHeight}>
+    <Stage width={700} height={windowHeight}>
       <Layer>
-        <Circle x={frontWheelRadius + 5} y={windowHeight - frontWheelRadius - 5} radius={frontWheelRadius} stroke="black" strokeWidth={4} />
+        <Circle x={frontWheelRadius + 5} y={windowHeight - frontWheelRadius - 5} radius={frontWheelRadius} stroke="black" strokeWidth={8} />
         <Circle
           x={frontWheelRadius + 5 + wheelbase}
           y={windowHeight - rearWheelRadius - 5}
           radius={rearWheelRadius}
           stroke="black"
-          strokeWidth={4}
+          strokeWidth={8}
         />
         <Line
           points={[
