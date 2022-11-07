@@ -24,7 +24,7 @@ function PublicFeed(props) {
   return (
     <div className="main-container">
       <div className="calc-container">
-        <h2 className="main-title">Public Studies</h2>
+        <h2 className="main-title">Open Studies</h2>
       </div>
       {calcList}
     </div>

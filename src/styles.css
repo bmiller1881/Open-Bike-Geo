@@ -66,6 +66,16 @@ nav p {
   margin-right: 15px;
 }
 
+.logo-secondary {
+  filter: grayscale(1) invert(1);
+  height: 25px;
+  margin-right: 15px;
+}
+
+.hover:hover {
+  opacity: 0.5;
+}
+
 .icon-opacity {
   opacity: 0.5;
 }
