@@ -11,10 +11,8 @@ const PORT = 3000;
 const app = express();
 
 // connect to Mongo DB
-const MONGO_URI = `mongodb+srv://admin:${process.env.CLIENT_SECRET_MONGODB}@cluster0.zr7uyxf.mongodb.net/?retryWrites=true&w=majority`;
-
 mongoose
-  .connect(MONGO_URI, {
+  .connect(process.env.MONGODB_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     dbName: 'openBikeGeo',
@@ -33,9 +31,8 @@ app.use('/api', apiRouter);
 
 // if in production mode, the server must serve static files and index.html
 if (process.env.NODE_ENV === 'production') {
-  console.log(path.join(__dirname, '../dist'));
   app.use('/dist', express.static(path.join(__dirname, '../dist')));
-  app.get('/', (req, res) => {
+  app.get('/*', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, '../dist/index.html'));
   });
 }

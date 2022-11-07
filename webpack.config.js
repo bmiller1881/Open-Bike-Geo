@@ -16,6 +16,7 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: './src/index.html',
+      favicon: './src/favicon.ico',
     }),
   ],
   // details for bundle transpiling
@@ -54,6 +55,7 @@ module.exports = {
   },
   // server allows for hot module reloading (HMR) in dev mode
   devServer: {
+    historyApiFallback: true,
     static: {
       // tells webpack dev server where to serve static content
       directory: path.resolve(__dirname, 'dist'),

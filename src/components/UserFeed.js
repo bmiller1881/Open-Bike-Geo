@@ -6,6 +6,7 @@ function UserFeed(props) {
   const navigate = useNavigate();
   const [calcList, setCalcList] = useState([]);
   const [inputName, setInputName] = useState('');
+  let renderPage;
 
   useEffect(() => {
     getData();
@@ -22,6 +23,22 @@ function UserFeed(props) {
         data.reverse().forEach((geo) => {
           calcListAdd.push(<Calc key={geo._id} data={geo} delete={getData} />);
         });
+        renderPage = (
+          <div className="main-container">
+            <div className="calc-container">
+              <input
+                className="new-input"
+                placeholder="enter project name"
+                value={inputName}
+                onChange={(event) => setInputName(event.target.value)}
+              />
+              <button className="new-button" onClick={postData}>
+                CREATE NEW STUDY
+              </button>
+            </div>
+            {calcList}
+          </div>
+        );
         setCalcList([calcListAdd, ...calcList]);
       })
       .catch((error) => console.log('ERROR: could not get-fetch: ' + error));
@@ -44,22 +61,7 @@ function UserFeed(props) {
       .catch((error) => console.log('ERROR: could not post-fetch: ' + error));
   }
 
-  return (
-    <div className="main-container">
-      <div className="calc-container">
-        <input
-          className="new-input"
-          placeholder="enter project name"
-          value={inputName}
-          onChange={(event) => setInputName(event.target.value)}
-        />
-        <button className="new-button" onClick={postData}>
-          CREATE NEW STUDY
-        </button>
-      </div>
-      {calcList}
-    </div>
-  );
+  return renderPage;
 }
 
 export default UserFeed;

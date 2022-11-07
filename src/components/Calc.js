@@ -120,7 +120,7 @@ function Calc(props) {
         <h3 className="calc-title">
           Study Title: <em>{props.data.name}</em>
         </h3>
-        <div className="calc-sub-container graph-container">
+        <div className="calc-sub-container graph-container item-centered">
           <Schematic dims={dimsObj} />
         </div>
         <div className="calc-sub-container calc-input-container">
