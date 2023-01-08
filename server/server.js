@@ -30,6 +30,7 @@ app.use(cookieParser());
 app.use('/api', apiRouter);
 
 // if in production mode, the server must serve static files and index.html
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
   app.use('/dist', express.static(path.join(__dirname, '../dist')));
   app.get('/*', (req, res) => {
