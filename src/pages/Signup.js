@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { Box, TextField, Typography, Card, Button } from '@mui/material';
+
+import Navigation from '../components/Navigation';
+import WorkArea from '../components/WorkArea';
 
 function Signup(props) {
   const navigate = useNavigate();
@@ -32,29 +34,36 @@ function Signup(props) {
 
   return (
     <>
-      <Header />
-      <div className="main-container p-v-200">
-        <div className="container flex-col">
-          <h2 className="m-sm">SIGN UP</h2>
-          <label className="m-sm">
-            <strong>username:</strong>
-          </label>
-          <input className="m-10-left input-4 m-sm" onChange={(event) => setInputUsername(event.target.value)} />
-          <br />
-          <label className="m-sm">
-            <strong>password:</strong>
-          </label>
-          <input type="password" className="m-10-left input-4 m-sm" onChange={(event) => setInputPassword(event.target.value)} />
-          <br />
-          <p className="color-warning">
-            <em>{authResponse}</em>
-          </p>
-          <button className="new-button m-sm" onClick={postData}>
-            SUBMIT
-          </button>
-        </div>
-      </div>
-      <Footer />
+      <Navigation />
+      <WorkArea>
+        <Box sx={{ m: '2rem' }}>
+          <Card
+            sx={{
+              textAlign: 'center',
+              width: 400,
+              mx: 'auto',
+              p: '4rem',
+            }}
+          >
+            <Typography variant="h5" data-testid="login-header" component="div" sx={{ flexGrow: 1, mb: '2rem' }}>
+              SIGN UP
+            </Typography>
+            <TextField label="username" variant="filled" sx={{ width: '100%' }} onChange={(event) => setInputUsername(event.target.value)} />
+            <br />
+            <TextField label="password" variant="filled" type="password" sx={{ width: '100%' }} className="m-10-left input-4 m-sm" onChange={(event) => setInputPassword(event.target.value)} />
+            <br />
+            <p className="color-warning">
+              <em>{authResponse}</em>
+            </p>
+            <Button variant="contained" sx={{ width: '100%' }} onClick={postData}>
+              SUBMIT
+            </Button>
+            <Button variant="text" sx={{ width: '100%' }} onClick={() => navigate('/login')}>
+              Login
+            </Button>
+          </Card>
+        </Box>
+      </WorkArea>
     </>
   );
 }

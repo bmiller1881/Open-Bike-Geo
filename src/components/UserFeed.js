@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Calc from './Calc';
 import { useNavigate } from 'react-router-dom';
+import { Box, Pagination, Stack, Typography, Button, TextField } from '@mui/material';
+
+import Calc from './Calc';
 
 function UserFeed(props) {
   const navigate = useNavigate();
   const [calcList, setCalcList] = useState([]);
   const [inputName, setInputName] = useState('');
   const [hidden, setHidden] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     getData();
@@ -24,7 +27,7 @@ function UserFeed(props) {
         data.reverse().forEach((geo) => {
           calcListAdd.push(<Calc key={geo._id} data={geo} delete={getData} />);
         });
-        setCalcList([calcListAdd, ...calcList]);
+        setCalcList([...calcList, ...calcListAdd]);
       })
       .catch((error) => console.log('ERROR: could not get-fetch: ' + error));
   }
@@ -42,29 +45,44 @@ function UserFeed(props) {
       .then((data) => {
         setCalcList([<Calc key={data._id} data={data} delete={getData} />, ...calcList]);
         setInputName('');
+        setPage(1);
       })
       .catch((error) => console.log('ERROR: could not post-fetch: ' + error));
   }
 
   return (
-    <div className="main-container">
-      <div className="calc-container">
-        {hidden ? (
-          <>
-            <input
-              className="new-input"
-              placeholder="enter project name"
-              value={inputName}
-              onChange={(event) => setInputName(event.target.value)}
-            />
-            <button className="new-button" onClick={postData}>
-              CREATE NEW STUDY
-            </button>
-          </>
-        ) : null}
-      </div>
-      {calcList}
-    </div>
+    <Box>
+      <Box sx={{ display: 'flex' }}>
+        <Box>
+          <TextField
+            sx={{ ml: '1rem' }}
+            size="small"
+            inputProps={{
+              style: {
+                height: '20px',
+              },
+            }}
+            placeholder="enter project name"
+            value={inputName}
+            onChange={(event) => setInputName(event.target.value)}
+          />
+          <Button sx={{ ml: '1rem', mr: '2rem' }} variant="contained" onClick={postData}>
+            CREATE NEW STUDY
+          </Button>
+        </Box>
+        <Stack spacing={2} sx={{ alignItems: 'center' }}>
+          <Pagination
+            shape="rounded"
+            count={calcList.length}
+            page={page}
+            onChange={(event, value) => {
+              setPage(value);
+            }}
+          />
+        </Stack>
+      </Box>
+      {calcList[page - 1]}
+    </Box>
   );
 }
 

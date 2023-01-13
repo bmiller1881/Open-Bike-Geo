@@ -1,19 +1,32 @@
 import React from 'react';
+import { Box, TextField, InputAdornment } from '@mui/material';
 
 function CalcInput(props) {
   return (
-    <div className={'calc-input'}>
-      <label htmlFor={props.name}>{props.title}: </label>
-      <input
-        className="m-10-left input-1"
+    <Box>
+      <TextField
+        sx={{ width: '250px' }}
+        label={props.title}
+        variant="filled"
         type="number"
         name={props.name}
         value={props.value}
         onChange={props.onChange}
-        disabled={props.disabled}
+        InputProps={{
+          readOnly: props.disabled,
+          endAdornment: (
+            <InputAdornment position="end" sx={{ opacity: '.5' }}>
+              {props.unit}
+            </InputAdornment>
+          ),
+        }}
+        inputProps={{
+          min: props.min,
+          max: props.max,
+          step: props.step,
+        }}
       />
-      <input className="m-10-left input-2" defaultValue={props.unit} disabled />
-    </div>
+    </Box>
   );
 }
 

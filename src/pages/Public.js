@@ -1,14 +1,16 @@
 import React from 'react';
-import Header from '../components/Header';
+import Navigation from '../components/Navigation';
 import PublicFeed from '../components/PublicFeed';
 import Footer from '../components/Footer';
+import WorkArea from '../components/WorkArea';
 
 function Public(props) {
   return (
     <>
-      <Header></Header>
-      <PublicFeed />
-      <Footer></Footer>
+      <Navigation />
+      <WorkArea>
+        <PublicFeed />
+      </WorkArea>
     </>
   );
 }

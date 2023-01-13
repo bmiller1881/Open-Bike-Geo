@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Box, TextField, Typography, Card, Button } from '@mui/material';
+
 import CalcInput from './CalcInput';
 import CalcValues from './CalcValues';
 import LineGraph from './LineGraph';
@@ -15,9 +17,7 @@ function useInput(initialState) {
 
 function Calc(props) {
   const [wheelbase, setWheelbase, wheelbaseOnChange] = useInput(props.data.wheelbase.val);
-  const [steeringAxisInclination, setSteeringAxisInclination, steeringAxisInclinationOnChange] = useInput(
-    props.data.steeringAxisInclination.val
-  );
+  const [steeringAxisInclination, setSteeringAxisInclination, steeringAxisInclinationOnChange] = useInput(props.data.steeringAxisInclination.val);
   const [frontAxleOffset, setFrontAxleOffset, frontAxleOffsetOnChange] = useInput(props.data.frontAxleOffset.val);
   const [frontWheelRadius, setFrontWheelRadius, frontWheelRadiusOnChange] = useInput(props.data.frontWheelRadius.val);
   const [rearWheelRadius, setRearWheelRadius, rearWheelRadiusOnChange] = useInput(props.data.rearWheelRadius.val);
@@ -115,8 +115,8 @@ function Calc(props) {
   }
 
   return (
-    <div>
-      <div className="calc-container">
+    <>
+      {/* <div className="calc-container">
         <h3 className="calc-title">
           Study Title: <em>{props.data.name}</em>
         </h3>
@@ -126,21 +126,9 @@ function Calc(props) {
         <div className="calc-sub-container calc-input-container">
           <h4 className="calc-title">Input Bicycle Characteristics</h4>
           <CalcInput name="wheelbase" title="Wheelbase" value={wheelbase} onChange={wheelbaseOnChange} unit="m" />
-          <CalcInput
-            name="steeringAxisInclination"
-            title="Steering Axis Inclination"
-            value={steeringAxisInclination}
-            onChange={steeringAxisInclinationOnChange}
-            unit="deg"
-          />
+          <CalcInput name="steeringAxisInclination" title="Steering Axis Inclination" value={steeringAxisInclination} onChange={steeringAxisInclinationOnChange} unit="deg" />
           <CalcInput name="frontAxleOffset" title="Front Axle Offset" value={frontAxleOffset} onChange={frontAxleOffsetOnChange} unit="m" />
-          <CalcInput
-            name="frontWheelRadius"
-            title="Front Wheel Radius"
-            value={frontWheelRadius}
-            onChange={frontWheelRadiusOnChange}
-            unit="m"
-          />
+          <CalcInput name="frontWheelRadius" title="Front Wheel Radius" value={frontWheelRadius} onChange={frontWheelRadiusOnChange} unit="m" />
           <CalcInput name="rearWheelRadius" title="Rear Wheel Radius" value={rearWheelRadius} onChange={rearWheelRadiusOnChange} unit="m" />
           <CalcInput name="handlebarRadius" title="Handlebar Radius" value={handlebarRadius} onChange={handlebarRadiusOnChange} unit="m" />
           <CalcInput name="massTotal" title="Mass Total" value={massTotal} onChange={massTotalOnChange} unit="kg" />
@@ -165,8 +153,66 @@ function Calc(props) {
         <button className="delete-button" onClick={deleteData}>
           <strong>DELETE</strong>
         </button>
-      </div>
-    </div>
+      </div> */}
+      <Box sx={{ px: '1rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+        <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', my: '2rem' }}>
+          <Typography variant="h6" sx={{ mx: '1rem' }}>
+            Study Title: <em>{props.data.name}</em>
+          </Typography>
+          <Button variant="contained" onClick={putData} sx={{ mx: '1rem' }}>
+            CALCULATE
+          </Button>
+          <Button variant="contained" onClick={deleteData} sx={{ mx: '1rem' }}>
+            DELETE
+          </Button>
+        </Box>
+        <Box sx={{ mx: '1rem', textAlign: 'center' }}>
+          <Typography variant="h6" sx={{ color: 'rgb(255,255,255,.6)' }}>
+            Schematic
+          </Typography>
+          <Schematic dims={dimsObj} />
+        </Box>
+        <Box sx={{ mx: '1rem', mb: '4rem', textAlign: 'center' }}>
+          <Typography variant="h6" sx={{ color: 'rgb(255,255,255,.6)' }}>
+            Geometry
+          </Typography>
+          <CalcInput name="wheelbase" title="Wheelbase" value={wheelbase} onChange={wheelbaseOnChange} unit="m" min={0.2} max={2} step={0.05} />
+          <CalcInput
+            name="steeringAxisInclination"
+            title="Steering Axis Inclination"
+            value={steeringAxisInclination}
+            onChange={steeringAxisInclinationOnChange}
+            unit="deg"
+            min={0}
+            max={70}
+            step={0.5}
+          />
+          <CalcInput name="frontAxleOffset" title="Front Axle Offset" value={frontAxleOffset} onChange={frontAxleOffsetOnChange} unit="m" min={0} max={0.5} step={0.005} />
+          <CalcInput name="frontWheelRadius" title="Front Wheel Radius" value={frontWheelRadius} onChange={frontWheelRadiusOnChange} unit="m" min={0.05} max={1} step={0.01} />
+          <CalcInput name="rearWheelRadius" title="Rear Wheel Radius" value={rearWheelRadius} onChange={rearWheelRadiusOnChange} unit="m" min={0.05} max={1} step={0.01} />
+          <CalcInput name="handlebarRadius" title="Handlebar Radius" value={handlebarRadius} onChange={handlebarRadiusOnChange} unit="m" min={0} max={1} step={0.005} />
+          <CalcInput name="massTotal" title="Mass Total" value={massTotal} onChange={massTotalOnChange} unit="kg" min={0} max={500} step={2} />
+          <CalcInput name="cgX" title="Horizontal Center of Gravity" value={cgX} onChange={cgXOnChange} unit="m" min={0} max={2} step={0.01} />
+          <CalcInput name="cgY" title="Vertical Center of Gravity" value={cgY} onChange={cgYOnChange} unit="m" min={0} max={4} step={0.01} />
+        </Box>
+        <Box sx={{ mx: '1rem', mb: '4rem', textAlign: 'center' }}>
+          <Typography variant="h6" sx={{ color: 'rgb(255,255,255,.6)' }}>
+            Calculated Constants
+          </Typography>
+          <CalcInput name="radiusGyration" title="Radius of Gyration" value={radiusGyration} unit="m" disabled={true} />
+          <CalcInput name="gravConst" title="Gravitational Constant" value={gravConst} unit="m/s^2" disabled={true} />
+          <CalcInput name="trail" title="Trail" value={trail} unit="m" disabled={true} />
+          <CalcInput name="forkFlop" title="Fork Flop" value={forkFlop} unit="N" disabled={true} />
+          <CalcInput name="k1" title="k1" value={k1} unit="kg m^2/s^2" disabled={true} />
+          <CalcInput name="k2" title="k2" value={k2} unit="kg" disabled={true} />
+          <CalcInput name="k3" title="k3" value={k3} unit="m/N" disabled={true} />
+          <CalcInput name="k4" title="k4" value={k4} unit="1/m" disabled={true} />
+        </Box>
+        <Box sx={{ minWidth: '400px', width: '1000px', textAlign: 'center' }}>
+          <LineGraph data={graph} />
+        </Box>
+      </Box>
+    </>
   );
 }
 

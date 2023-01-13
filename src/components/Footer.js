@@ -1,14 +1,15 @@
 import React from 'react';
+import { Box, TextField, Typography, Card } from '@mui/material';
 
 function Footer(props) {
   return (
     <footer>
-      <div>
-        <h4 className="m-10-vert">Open Bike Geo</h4>
-        <p>Designed By: Brandon Miller</p>
-        <p>References: Model of a Bicycle from Handling Qualities Considerations: Davol, Owen, Fabijanic</p>
-        <p>Version: V1.0 2022</p>
-      </div>
+      <Box sx={{ p: '2rem' }}>
+        <Typography>Open Bike Geo</Typography>
+        <Typography>Designed By: Brandon Miller</Typography>
+        <Typography>References: Model of a Bicycle from Handling Qualities Considerations: Davol, Owen, Fabijanic</Typography>
+        <Typography>Version: V2.0 2023</Typography>
+      </Box>
     </footer>
   );
 }

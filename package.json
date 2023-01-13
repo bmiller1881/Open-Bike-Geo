@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/bmiller1881/Open-Bike-Geo#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
