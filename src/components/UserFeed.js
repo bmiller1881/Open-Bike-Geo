@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useGetUserDataQuery } from '../redux/apis/apiSlice';
 import { useNavigate } from 'react-router-dom';
 import { Box, Pagination, Stack, Typography, Button, TextField } from '@mui/material';
 
@@ -6,14 +7,27 @@ import Calc from './Calc';
 
 function UserFeed(props) {
   const navigate = useNavigate();
-  const [calcList, setCalcList] = useState([]);
+  // const [calcList, setCalcList] = useState([]);
   const [inputName, setInputName] = useState('');
   const [hidden, setHidden] = useState(false);
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const calcList = [];
+  const { data: userData = [], isLoading, isFetching, isSuccess, isError, error } = useGetUserDataQuery();
+  console.log('userData', isFetching, userData);
+  const calcListAdd = [];
+  if (isError) navigate('/login');
+  else if (isSuccess) {
+    const posts = [...userData];
+    posts.reverse().forEach((geo) => {
+      calcListAdd.push(<Calc key={geo._id} data={geo} delete={getData} />);
+    });
+    calcList.push(...calcListAdd);
+  }
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   function getData() {
     fetch('/api/user')

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useGetUsernameQuery } from './redux/apis/apiSlice';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -24,6 +25,8 @@ const darkTheme = createTheme({
 });
 
 function App() {
+  const { data: username = null, isLoading, isFetching, isSuccess, isError, error } = useGetUsernameQuery();
+
   const router = createBrowserRouter([
     { path: '/', element: <Public /> },
     { path: '/user', element: <User /> },
